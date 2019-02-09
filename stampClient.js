@@ -60,7 +60,7 @@ class StampClient {
       value => value != null
     );
 
-    const FromZIPCode = from.zip;
+    const FromZIPCode = from.zip.slice(0, 5);
 
     const res = await this.cleanseAddress({ Address, FromZIPCode });
     return {
