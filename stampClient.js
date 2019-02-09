@@ -3,7 +3,7 @@ const _ = require("lodash");
 
 class StampClient {
   constructor(url) {
-    this.URL = url
+    this.URL = url;
   }
   async init(credentials) {
     this.credentials = credentials;
@@ -55,7 +55,7 @@ class StampClient {
         Address2: to.line2,
         City: to.city,
         State: to.state,
-        ZIPCode: to.zip
+        ZIPCode: to.zip.slice(0, 5)
       },
       value => value != null
     );
@@ -77,7 +77,7 @@ class StampClient {
         Address2: from.line2,
         City: from.city,
         State: from.state,
-        ZIPCode: from.zip
+        ZIPCode: from.zip.slice(0, 5)
       },
       v => v != null
     );
