@@ -60,7 +60,7 @@ describe("StampClient", () => {
       line2: "13060 Temple Ave",
       city: "City of Industry",
       state: "CA",
-      zip: "91745",
+      zip: "91745-22",
       country: "us"
     };
 
