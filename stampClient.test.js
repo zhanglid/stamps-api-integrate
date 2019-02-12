@@ -44,6 +44,12 @@ describe("StampClient", () => {
     expect(res).to.be.an("array");
   });
 
+  it("refreshAuthenticator should refetch account and authenticator", async () => {
+    stampClient.authenticator = null;
+    await stampClient.refreshAuthenticator();
+    expect(stampClient.authenticator).to.be.exist;
+  });
+
   describe("create label", () => {
     const to = {
       name: "David Deschamps",

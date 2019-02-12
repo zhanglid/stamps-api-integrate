@@ -5,6 +5,16 @@ class StampClient {
   constructor(url) {
     this.URL = url;
   }
+
+  async refreshAuthenticator() {
+    return (this.authenticator = _.get(
+      await this.client.AuthenticateUserAsync({
+        Credentials: this.credentials
+      }),
+      "[0].Authenticator"
+    ));
+  }
+
   async init(credentials) {
     this.credentials = credentials;
     this.client = await soap.createClientAsync(this.URL);
@@ -12,12 +22,7 @@ class StampClient {
       throw new Error(`Error create client`);
     }
 
-    this.authenticator = _.get(
-      await this.client.AuthenticateUserAsync({
-        Credentials: credentials
-      }),
-      "[0].Authenticator"
-    );
+    await this.refreshAuthenticator();
 
     _.keys(this.client).forEach(funcName => {
       if (/.*Async$/.test(funcName)) {
