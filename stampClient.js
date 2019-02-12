@@ -48,6 +48,14 @@ class StampClient {
   }
 
   async queryRates(rate) {
+    rate = _.mapValues(_.pickBy(rate, v => v != null), (v, k) => {
+      if (v instanceof Date) {
+        return v.toISOString().slice(0, 10);
+      } else if (/.*Date$/.test(v)) {
+        return v.slice(0, 10);
+      }
+      return v;
+    });
     const res = await this.getRates({ Rate: rate });
     return res.Rates.Rate;
   }
