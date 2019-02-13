@@ -85,7 +85,8 @@ describe("StampClient", () => {
         from,
         cleanseAddress: cleanseResult.cleanseAddress,
         rate,
-        id: orderId
+        id: orderId,
+        memo: '123412345'
       });
       expect(res.URL).to.be.an("string");
     });

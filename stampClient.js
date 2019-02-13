@@ -82,7 +82,7 @@ class StampClient {
     };
   }
 
-  async createLabel({ from, cleanseAddress, rate, id }) {
+  async createLabel({ from, cleanseAddress, rate, id, memo }) {
     const From = _.pickBy(
       {
         FullName: from.name,
@@ -108,7 +108,8 @@ class StampClient {
       IntegratorTxID: id,
       Rate,
       From,
-      To
+      To,
+      memo
     });
     return res;
   }
