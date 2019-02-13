@@ -32,6 +32,18 @@ describe("StampClient", () => {
     expect(res).to.has.keys(["AvailablePostage", "ControlTotal"]);
   });
 
+  it("shoud set autobuy", async () => {
+    const res = await stampClient.setAutoBuy({
+      AutoBuySettings: {
+        AutoBuyEnabled: true,
+        PurchaseAmount: 200,
+        TriggerAmount: 100
+      }
+    });
+
+    expect(res).to.be.exist;
+  });
+
   it("query rates should get the rates array", async () => {
     const res = await stampClient.queryRates({
       FromZIPCode: "90007",
@@ -86,7 +98,7 @@ describe("StampClient", () => {
         cleanseAddress: cleanseResult.cleanseAddress,
         rate,
         id: orderId,
-        memo: '123412345'
+        memo: "123412345"
       });
       expect(res.URL).to.be.an("string");
     });
